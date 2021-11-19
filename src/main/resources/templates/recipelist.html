@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Bookstore</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+
+<div class="container">
+	<div class="col-md-4">
+		<h1>My Recipes</h1>
+	</div>
+	
+	<table>
+		<tr>
+			<th>Category</th>
+			<th>Header</th>
+			<th>Description</th>
+			<th>Tried</th>
+			<th>Rating</th>
+		</tr>
+		
+		<tr th:each="recipe : ${recipes}">
+		<td th:text="${recipe.category.categoryName}">Category</td>
+		<td th:text="${recipe.header}">Header</td>
+		<td th:text="${recipe.description}">Description</td>
+		<td th:text="${recipe.tried}">Tried</td>
+		<td th:text="${recipe.rating}">Rating</td>
+		</tr>
+		
+	</table>
+	
+</div> 
+
+
+</body>
