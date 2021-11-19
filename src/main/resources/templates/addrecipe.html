@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Reseptipankki</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">My Recipes</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a class="nav-item nav-link active" href="/categorylist">Categories</a>
+      <a class="nav-item nav-link active" href="/addCategory">Add category</a>
+    </div>
+  </div>
+</nav>
+
+<br/>
+	
+	<h1>Add a new recipe</h1>
+	
+	<br/>
+	
+	<div>
+		<form th:object="${recipe}" th:action="@{save}" action="#" method="post">
+			
+			<label for="header">Header</label>
+			<input type="text" id="title" th:field="*{header}"/>
+			
+			<label for="description">Description</label>
+			<input type="text" id="description" th:field="*{description}"/>
+			
+			<label for="rating">Rating</label>
+			<input type="text" id="rating" th:field="*{rating}"/>
+
+			
+			<label class="dropdown" for="categorylist">Category</label>
+				<select id="categorylist" th:field="*{category}" class="form-control">
+					<option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+				</select>			
+			
+			<br/>
+			
+			<input type="submit" value="Save"></input>
+		
+		</form>
+	
+	
+	</div>
+	
+	</div>
+    
+</body>
+</html>

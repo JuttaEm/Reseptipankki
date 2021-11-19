@@ -56,6 +56,15 @@ public class Recipe {
 		this.category = category;
 	}
 	
+	public Recipe(String header, String description, int rating, Category category) {
+		super();
+		this.recipeId = 0;
+		this.header = header;
+		this.description = description;
+		this.rating = rating;
+		this.category = category;
+	}
+	
 	
 	// Getters, setters and toString-method for each attribute
 	public long getRecipeId() {

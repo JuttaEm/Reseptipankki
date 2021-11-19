@@ -2,17 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Reseptipankki</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Reseptipankki</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-
-
-
-
-<div class="container">
+	
+	<div class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">My Recipes</a>
@@ -31,31 +28,28 @@
 
 <br/>
 	
+	<h1>Categories</h1>
+	
+	<br/>
+	
 	<table class="table">
 	<thead class="thead-light">
 		<tr>
-			<th scope="col">Category</th>
-			<th scope="col">Recipe</th>
-			<th scope="col">Description</th>
-			<th scope="col">Tried</th>
-			<th scope="col">Rating</th>
+			<th>Name</th>
 		</tr>
 		
-		<tr th:each="recipe : ${recipes}">
-		<td th:text="${recipe.category.categoryName}">Category</td>
-		<td th:text="${recipe.header}">Header</td>
-		<td th:text="${recipe.description}">Description</td>
-		<td th:text="${recipe.tried}">Tried</td>
-		<td th:text="${recipe.rating}">Rating</td>
+		<tr th:each="category : ${categories}">
+		<td th:text="${category.categoryName}">Name</td>
 		</tr>
 		
 	</table>
 	
 	<br/>
 	
-	<a href="/addrecipe" class="btn btn-dark">Add new recipe</a>
+	<a href="/addCategory" class="btn btn-dark">Add new category</a>
 	
-</div> 
-
-
+	</div>
+    
 </body>
+
+</html>
