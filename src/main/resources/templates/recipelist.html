@@ -5,6 +5,7 @@
 	<title>Reseptipankki</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -39,6 +40,8 @@
 			<th scope="col">Description</th>
 			<th scope="col">Tried</th>
 			<th scope="col">Rating</th>
+			<th> </th>
+			<th> </th>
 		</tr>
 		
 		<tr th:each="recipe : ${recipes}">
@@ -47,6 +50,8 @@
 		<td th:text="${recipe.description}">Description</td>
 		<td th:text="${recipe.tried}">Tried</td>
 		<td th:text="${recipe.rating}">Rating</td>
+		<td><a th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</a></td>
+		<td><a th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</a></td>
 		</tr>
 		
 	</table>
