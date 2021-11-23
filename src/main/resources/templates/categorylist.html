@@ -21,7 +21,7 @@
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addCategory">Add category</a>
+      <a class="nav-item nav-link active" href="/addcategory">Add category</a>
     </div>
   </div>
 </nav>
@@ -36,17 +36,19 @@
 	<thead class="thead-light">
 		<tr>
 			<th>Name</th>
+			<th> </th>
 		</tr>
 		
 		<tr th:each="category : ${categories}">
 		<td th:text="${category.categoryName}">Name</td>
+		<td><a th:href="@{/deletecategory/{categoryid}(categoryid=${category.categoryId})}">Delete</a></td>
 		</tr>
 		
 	</table>
 	
 	<br/>
 	
-	<a href="/addCategory" class="btn btn-dark">Add new category</a>
+	<a href="/addcategory" class="btn btn-dark">Add new category</a>
 	
 	</div>
     

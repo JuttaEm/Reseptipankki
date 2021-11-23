@@ -1,13 +1,18 @@
 package backend.Reseptipankki.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import backend.Reseptipankki.domain.CategoryRepository;
 import backend.Reseptipankki.domain.Recipe;
@@ -58,6 +63,30 @@ public class RecipeController {
 		model.addAttribute("categories", categoryRepository.findAll());
 		return "editrecipe";
 	}
+	
+	
+	// REST-methods
+	
+	// RESTful service to get a list of all recipes
+	@RequestMapping(value="/recipes", method = RequestMethod.GET)
+	public @ResponseBody List<Recipe> recipeListRest() {
+		return (List<Recipe>) recipeRepository.findAll();
+	}
+	
+	// RESTful service to find a specific recipe with id
+	@RequestMapping(value="/recipe/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Recipe> findRecipeRest(@PathVariable("id") Long recipeId) {
+		return recipeRepository.findById(recipeId);
+	}
+	
+	// RESTful service to save new recipe
+	@RequestMapping(value="/recipes", method = RequestMethod.POST)
+	public @ResponseBody Recipe saveRecipeRest(@RequestBody Recipe recipe) {
+		return recipeRepository.save(recipe);
+	}
+	
+	
+	
 	
 	
 
