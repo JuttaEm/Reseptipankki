@@ -50,8 +50,8 @@
 		<td th:text="${recipe.description}">Description</td>
 		<td th:text="${recipe.tried}">Tried</td>
 		<td th:text="${recipe.rating}">Rating</td>
-		<td><a th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</a></td>
-		<td><a th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</a></td>
+		<td><button type="button" class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</button></td>
+		<td><button type="button" class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</button></td>
 		</tr>
 		
 	</table>

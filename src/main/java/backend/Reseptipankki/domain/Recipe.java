@@ -6,6 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,9 +19,15 @@ public class Recipe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long recipeId;
+	
+	@NotNull
+	@Size(min=3, max=40)
 	private String header;
 	private String description;
 	private boolean tried;
+	
+	@Min(1)
+	@Max(5)
 	private int rating;
 	
 	@ManyToOne
@@ -29,12 +39,6 @@ public class Recipe {
 	// Constructors
 	public Recipe() {
 		super();
-		this.recipeId = 0;
-		this.header = null;
-		this.description = null;
-		this.tried = true;
-		this.rating = 0;
-		this.category = null;
 	}
 	
 	public Recipe(String header, String description, Boolean tried, int rating) {

@@ -36,15 +36,15 @@
 		<form th:object="${category}" th:action="@{addcategory}" action="#" method="post">
 			<table>
 				<tr>
-					<td>Name of the category</td>
+					<td>Name of the category:</td>
 					<td><input type="text" id="name" th:field="*{categoryName}"/></td>
 					<td th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Category Error</td>
 				</tr>
 				
-				<tr></tr>
+				<tr> </tr>
 				
 				<tr>
-					<td><button type="submit">Save</button></td>
+					<td><br/><button class="btn btn-dark" type="submit">Save</button></td>
 				</tr>
 			
 			</table>		

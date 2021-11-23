@@ -36,27 +36,32 @@
 	<br/>
 	
 	<div>
-		<form th:object="${recipe}" th:action="@{save}" action="#" method="post">
+		<form th:object="${recipe}" th:action="@{addrecipe}" action="#" method="post">
+		
+			<table>
+				<tr>
+					<td>Header:</td>
+					<td><input type="text" id="title" placeholder="Header for the recipe" th:field="*{header}"/></td>
+					<td th:if="${#fields.hasErrors('header')}" th:errors="*{header}">Header Error</td>
+				</tr>
+				<tr>
+					<td>Description:</td>	
+					<td><input type="text" id="description" placeholder="Description" th:field="*{description}"/></td>		
+				</tr>
+				<tr>
+					<td>Rating:</td>
+					<td><input type="text" id="rating" placeholder="Rating 1-5" th:field="*{rating}"/></td>
+					<td th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating Error</td>
+				</tr>			
+			</table>
+			
+			<br/>
 			
 			<div class="form-group">
-			<label for="header">Header</label>
-			<input type="text" id="title" placeholder="Header for the recipe" th:field="*{header}"/>
-			</div>
+				<input type="checkbox" class="form-check-input" id="recipetried">
+				<label for="recipetried">Have you already tried this recipe?</label>
+			</div>			
 			
-			<div class="form-group">
-			<label for="description">Description</label>
-			<input type="text" id="description" th:field="*{description}"/>
-			</div>
-			
-			<div class="form-group">
-			<label for="rating">Rating</label>
-			<input type="text" id="rating" th:field="*{rating}"/>
-			</div>
-			
-			<div class="form-group">
-			<input type="checkbox" class="form-check-input" id="recipetried">
-			<label class="form-check-label" for="recipetried">Have you already tried this recipe?</label>
-			</div>
 			
 			<div class="form-group">
 			<label class="dropdown" for="categorylist">Category</label>

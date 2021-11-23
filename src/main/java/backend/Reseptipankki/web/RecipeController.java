@@ -3,9 +3,12 @@ package backend.Reseptipankki.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,11 +48,23 @@ public class RecipeController {
 		return "addrecipe";
 	}
 	
-	@PostMapping("/save")
-	public String save(Recipe recipe) {
-		recipeRepository.save(recipe);
-		return "redirect:recipelist";
+	@PostMapping("/addrecipe")
+	public String recipeAdded(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", categoryRepository.findAll());
+			return "addrecipe";
+		} else {
+			model.addAttribute("recipe", recipe);
+			recipeRepository.save(recipe);
+			return "redirect:recipelist";
+		}
 	}
+	
+	//@PostMapping("/save")
+	//public String save(Recipe recipe) {
+		//recipeRepository.save(recipe);
+		//return "redirect:recipelist";
+	//}
 	
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
 	public String deleteRecipe(@PathVariable("id") Long recipeId, Model model) {
