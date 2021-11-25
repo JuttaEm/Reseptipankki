@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 	<title>Reseptipankki</title>
@@ -40,8 +40,8 @@
 			<th scope="col">Description</th>
 			<th scope="col">Tried</th>
 			<th scope="col">Rating</th>
-			<th> </th>
-			<th> </th>
+			<th sec:authorize="hasAuthority('ADMIN')"> </th>
+			<th sec:authorize="hasAuthority('ADMIN')"> </th>
 		</tr>
 		
 		<tr th:each="recipe : ${recipes}">
@@ -50,15 +50,15 @@
 		<td th:text="${recipe.description}">Description</td>
 		<td th:text="${recipe.tried}">Tried</td>
 		<td th:text="${recipe.rating}">Rating</td>
-		<td><button type="button" class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</button></td>
-		<td><button type="button" class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</button></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</button></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</button></td>
 		</tr>
 		
 	</table>
 	
 	<br/>
 	
-	<a href="/addrecipe" class="btn btn-dark">Add new recipe</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/addrecipe" class="btn btn-dark">Add new recipe</a>
 	
 </div> 
 

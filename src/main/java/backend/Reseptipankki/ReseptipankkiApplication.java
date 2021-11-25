@@ -11,6 +11,8 @@ import backend.Reseptipankki.domain.Category;
 import backend.Reseptipankki.domain.CategoryRepository;
 import backend.Reseptipankki.domain.Recipe;
 import backend.Reseptipankki.domain.RecipeRepository;
+import backend.Reseptipankki.domain.User;
+import backend.Reseptipankki.domain.UserRepository;
 
 @SpringBootApplication
 public class ReseptipankkiApplication {
@@ -22,7 +24,7 @@ public class ReseptipankkiApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(RecipeRepository recipeRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner demo(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 			
 			log.info("Save demo categories");
@@ -42,7 +44,7 @@ public class ReseptipankkiApplication {
 			categoryRepository.save(category6);
 			
 			
-			log.info("Save demodata");
+			log.info("Save demo recipes");
 			
 			recipeRepository.save(new Recipe("Makaronilaatikko", "Loistava vegaaninen ruoka!", true, 4, category1));
 			recipeRepository.save(new Recipe("Kasvissosekeitto", "Maukasta talviruokaa", false, 3, category2));
@@ -55,6 +57,14 @@ public class ReseptipankkiApplication {
 			for (Recipe recipe : recipeRepository.findAll()) {
 				log.info(recipe.toString());
 			}
+			
+			log.info("Save demo users");
+			
+			User user1 = new User("user1", "User1", "$2a$10$/DvaHu98HsSucTsDBvCxGeJxfQP1szoVJuEunuBceMSrxtvnATGii", "USER");
+			User admin1 = new  User("admin1", "Admin1", "$2a$10$T62MKRq3O7e989jLzQQybuEiEPK1mjfZbo5Xfdn5JQTQ5nQ1n1iGy", "ADMIN");
+			
+			userRepository.save(user1);
+			userRepository.save(admin1);
 			
 		};
 	}

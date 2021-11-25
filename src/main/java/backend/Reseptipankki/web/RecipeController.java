@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,6 +49,7 @@ public class RecipeController {
 		return "addrecipe";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/addrecipe")
 	public String recipeAdded(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -60,18 +62,14 @@ public class RecipeController {
 		}
 	}
 	
-	//@PostMapping("/save")
-	//public String save(Recipe recipe) {
-		//recipeRepository.save(recipe);
-		//return "redirect:recipelist";
-	//}
-	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
 	public String deleteRecipe(@PathVariable("id") Long recipeId, Model model) {
 		recipeRepository.deleteById(recipeId);
 		return "redirect:../recipelist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/edit/{id}")
 	public String editRecipe(@PathVariable("id") Long recipeId, Model model) {
 		model.addAttribute("recipe", recipeRepository.findById(recipeId));
