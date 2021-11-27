@@ -19,11 +19,17 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addCategory">Add category</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
     </div>
   </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
 </nav>
 
 <br/>
@@ -32,13 +38,19 @@
 
 	<div class="jumbotron">
   	<h1 class="display-4">Hello, [[${#httpServletRequest.remoteUser}]]</h1>
-  		<p class="lead">Welcome to Reseptipankki! Here you can keep track of your favourite recipes, sort them into categories and give them ratings.</p>
+  		<p class="lead">Welcome to Reseptipankki! This is a collection of tried and tested recipes. I have written comments for each recipe I have tried,
+  		and given them a rating between 1 to 5 stars.</p>
   	<hr class="my-4">
-  		<p>You can also save your favourite food blogs or recipe sites if you ever need inspiration on what to cook next.</p>
-  	<a class="btn btn-light btn-lg" href="/recipelist" role="button">Let's start!</a>
+  		<p>You can also find my favourite food blogs and recipe sites listed here if you ever need an inspiration on what to cook next.</p>
 	</div>
-
+	
+	<div class="text-center">
+	<img class="rounded-pill" th:src="@{/images/salmon.jpg}"/>
+	</div>
+	
 </div>
+
+
 
 
 

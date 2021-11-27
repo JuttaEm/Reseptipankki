@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Reseptipankki</title>
@@ -8,31 +8,51 @@
 </head>
 
 <body>
+
+<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">My Recipes</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
+      <a class="nav-item nav-link active" href="/categorylist">Categories</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
+    </div>
+  </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
+</nav>
+
+<br/>
 	
 	<h1>Edit your recipe</h1>
 	
 	<div>
-		<form th:object="${recipe}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${recipe}" th:action="@{../addrecipe}" action="#" method="post">
 			
 			<input type="hidden" id="id" th:field="*{recipeId}" readonly="readonly"/>
 			
 			<div class="form-group">
-			<label for="header">Header</label>
+			<label style="padding-right: 15px" for="header">Header:</label>
 			<input type="text" id="title" th:field="*{header}"/>
 			</div>
 			
 			<div class="form-group">
-			<label for="description">Description</label>
-			<input type="text" id="description" th:field="*{description}"/>
+			<label style="padding-right: 15px" for="comment">Comment:</label>
+			<input type="text" id="comment" th:field="*{comment}"/>
 			</div>
 			
 			<div class="form-group">
-			<label for="tried">Tried</label>
-			<input type="text" id="tried" th:field="*{tried}"/>
-			</div>
-			
-			<div class="form-group">
-			<label for="rating">Rating</label>
+			<label style="padding-right: 15px" for="rating">Rating</label>
 			<input type="text" id="rating" th:field="*{rating}"/>
 			</div>
 			
@@ -49,6 +69,8 @@
 		
 		</form>
 	
+	
+	</div>
 	
 	</div>
 

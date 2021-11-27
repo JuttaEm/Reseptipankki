@@ -23,8 +23,7 @@ public class Recipe {
 	@NotNull
 	@Size(min=3, max=40)
 	private String header;
-	private String description;
-	private boolean tried;
+	private String comment;
 	
 	@Min(1)
 	@Max(5)
@@ -41,30 +40,19 @@ public class Recipe {
 		super();
 	}
 	
-	public Recipe(String header, String description, Boolean tried, int rating) {
+	public Recipe(String header, String comment, int rating) {
 		super();
 		this.recipeId = 0;
 		this.header = header;
-		this.description = description;
-		this.tried = tried;
+		this.comment = comment;
 		this.rating = rating;
 	}
 	
-	public Recipe(String header, String description, Boolean tried, int rating, Category category) {
+	public Recipe(String header, String comment, int rating, Category category) {
 		super();
 		this.recipeId = 0;
 		this.header = header;
-		this.description = description;
-		this.tried = tried;
-		this.rating = rating;
-		this.category = category;
-	}
-	
-	public Recipe(String header, String description, int rating, Category category) {
-		super();
-		this.recipeId = 0;
-		this.header = header;
-		this.description = description;
+		this.comment = comment;
 		this.rating = rating;
 		this.category = category;
 	}
@@ -83,18 +71,13 @@ public class Recipe {
 	public void setHeader(String header) {
 		this.header = header;
 	}
-	public String getDescription() {
-		return description;
+	public String getComment() {
+		return comment;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
-	public boolean isTried() {
-		return tried;
-	}
-	public void setTried(boolean tried) {
-		this.tried = tried;
-	}
+
 	public int getRating() {
 		return rating;
 	}
@@ -110,9 +93,11 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		return "Recipe [recipeId=" + recipeId + ", header=" + header + ", description=" + description + ", tried="
-				+ tried + ", rating=" + rating + "]";
+		return "Recipe [recipeId=" + recipeId + ", header=" + header + ", comment=" + comment + ", rating="
+				+ rating + ", category=" + category + "]";
 	}
+
+
 	
 	
 	

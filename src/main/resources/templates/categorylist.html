@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Reseptipankki</title>
@@ -19,11 +19,17 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addcategory">Add category</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
     </div>
   </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
 </nav>
 
 <br/>
@@ -41,14 +47,14 @@
 		
 		<tr th:each="category : ${categories}">
 		<td th:text="${category.categoryName}">Name</td>
-		<td><button type="button" class="btn btn-outline-danger" th:href="@{/deletecategory/{categoryid}(categoryid=${category.categoryId})}">Delete</button></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deletecategory/{categoryid}(categoryid=${category.categoryId})}">Delete</a></td>
 		</tr>
 		
 	</table>
 	
 	<br/>
 	
-	<a href="/addcategory" class="btn btn-dark">Add new category</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/addcategory" class="btn btn-dark">Add new category</a>
 	
 	</div>
     

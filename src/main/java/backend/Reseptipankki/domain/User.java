@@ -22,11 +22,6 @@ public class User {
 	private String username;
 	
 	@NotNull
-	@Size(min=2, max=25)
-	@Column(name = "name", nullable = false)
-	private String firstName;
-	
-	@NotNull
 	@Size(min=8)
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
@@ -39,10 +34,9 @@ public class User {
 		super();
 	}
 	
-	public User(String username, String firstName, String passwordHash, String role) {
+	public User(String username, String passwordHash, String role) {
 		super();
 		this.username = username;
-		this.firstName = firstName;
 		this.passwordHash = passwordHash;
 		this.role = role;
 	}
@@ -66,14 +60,6 @@ public class User {
 		this.username = username;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getPasswordHash() {
 		return passwordHash;
 	}
@@ -92,10 +78,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", passwordHash="
-				+ passwordHash + ", role=" + role + "]";
-	}
-	
+		return "User [userId=" + userId + ", username=" + username + ", passwordHash=" + passwordHash + ", role=" + role
+				+ "]";
+	}	
 		
 	
 

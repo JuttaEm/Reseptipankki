@@ -10,9 +10,6 @@
 
 <body>
 
-
-
-
 <div class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,11 +20,17 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addcategory">Add category</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
     </div>
   </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
 </nav>
 
 <br/>
@@ -37,21 +40,19 @@
 		<tr>
 			<th scope="col">Category</th>
 			<th scope="col">Recipe</th>
-			<th scope="col">Description</th>
-			<th scope="col">Tried</th>
+			<th scope="col">Comments</th>
 			<th scope="col">Rating</th>
-			<th sec:authorize="hasAuthority('ADMIN')"> </th>
-			<th sec:authorize="hasAuthority('ADMIN')"> </th>
+			<th> </th>
+			<th> </th>
 		</tr>
 		
 		<tr th:each="recipe : ${recipes}">
 		<td th:text="${recipe.category.categoryName}">Category</td>
 		<td th:text="${recipe.header}">Header</td>
-		<td th:text="${recipe.description}">Description</td>
-		<td th:text="${recipe.tried}">Tried</td>
+		<td th:text="${recipe.comment}">Comments</td>
 		<td th:text="${recipe.rating}">Rating</td>
-		<td sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</button></td>
-		<td sec:authorize="hasAuthority('ADMIN')"><button type="button" class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</button></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</a></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</a></td>
 		</tr>
 		
 	</table>

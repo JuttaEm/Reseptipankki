@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Reseptipankki</title>
@@ -12,7 +12,7 @@
 
 <body>
 
-	<div class="container">
+<div class="container">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">My Recipes</a>
@@ -22,11 +22,17 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addCategory">Add category</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
     </div>
   </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
 </nav>
 
 <br/>
@@ -40,28 +46,22 @@
 		
 			<table>
 				<tr>
-					<td>Header:</td>
+					<td style="padding-right: 15px">Header:</td>
 					<td><input type="text" id="title" placeholder="Header for the recipe" th:field="*{header}"/></td>
 					<td th:if="${#fields.hasErrors('header')}" th:errors="*{header}">Header Error</td>
 				</tr>
 				<tr>
-					<td>Description:</td>	
-					<td><input type="text" id="description" placeholder="Description" th:field="*{description}"/></td>		
+					<td style="padding-right: 15px">Comments:</td>	
+					<td><input type="text" id="comment" placeholder="Comments" th:field="*{comment}"/></td>		
 				</tr>
 				<tr>
-					<td>Rating:</td>
+					<td style="padding-right: 15px">Rating:</td>
 					<td><input type="text" id="rating" placeholder="Rating 1-5" th:field="*{rating}"/></td>
 					<td th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Rating Error</td>
 				</tr>			
 			</table>
 			
-			<br/>
-			
-			<div class="form-group">
-				<input type="checkbox" class="form-check-input" id="recipetried">
-				<label for="recipetried">Have you already tried this recipe?</label>
-			</div>			
-			
+			<br/>			
 			
 			<div class="form-group">
 			<label class="dropdown" for="categorylist">Category</label>

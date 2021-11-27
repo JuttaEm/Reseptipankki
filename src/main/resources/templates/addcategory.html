@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>Reseptipankki</title>
@@ -19,16 +19,22 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/recipelist">All recipes<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/addrecipe">Add recipe</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addrecipe">Add a recipe</a>
       <a class="nav-item nav-link active" href="/categorylist">Categories</a>
-      <a class="nav-item nav-link active" href="/addcategory">Add category</a>
+      <a sec:authorize="hasAuthority('ADMIN')" class="nav-item nav-link active" href="/addcategory">Add a category</a>
     </div>
   </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
 </nav>
 
 <br/>
 	
-	<h1>Add a new category</h1>
+	<h2>Add a new category</h2>
 	
 	<br/>
 	
@@ -36,7 +42,7 @@
 		<form th:object="${category}" th:action="@{addcategory}" action="#" method="post">
 			<table>
 				<tr>
-					<td>Name of the category:</td>
+					<td style="padding-right: 15px">Name of the category:</td>
 					<td><input type="text" id="name" th:field="*{categoryName}"/></td>
 					<td th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Category Error</td>
 				</tr>

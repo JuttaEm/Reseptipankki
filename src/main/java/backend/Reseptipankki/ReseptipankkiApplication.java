@@ -46,12 +46,12 @@ public class ReseptipankkiApplication {
 			
 			log.info("Save demo recipes");
 			
-			recipeRepository.save(new Recipe("Makaronilaatikko", "Loistava vegaaninen ruoka!", true, 4, category1));
-			recipeRepository.save(new Recipe("Kasvissosekeitto", "Maukasta talviruokaa", false, 3, category2));
-			recipeRepository.save(new Recipe("Tortillat", "Helppoa ja herkullista :)", true, 5, category3));
-			recipeRepository.save(new Recipe("Porkkanakakku", "Terveellinen vaihtoehto täytekakulle", true, 4, category4));
-			recipeRepository.save(new Recipe("Munakasrulla", "Yllättävän vaikea saada pysymään koossa", false, 2, category5));
-			recipeRepository.save(new Recipe("Paistettu riisi kanalla", "Superhelppo arkiruoka", true, 5, category6));
+			recipeRepository.save(new Recipe("Makaronilaatikko", "Loistava vegaaninen ruoka!", 4, category1));
+			recipeRepository.save(new Recipe("Kasvissosekeitto", "Maukasta talviruokaa", 3, category2));
+			recipeRepository.save(new Recipe("Tortillat", "Helppoa ja herkullista :)", 5, category3));
+			recipeRepository.save(new Recipe("Porkkanakakku", "Terveellinen vaihtoehto täytekakulle", 4, category4));
+			recipeRepository.save(new Recipe("Munakasrulla", "Yllättävän vaikea saada pysymään koossa", 2, category5));
+			recipeRepository.save(new Recipe("Paistettu riisi kanalla", "Superhelppo arkiruoka", 5, category6));
 			
 			log.info("Fetch all recipes");
 			for (Recipe recipe : recipeRepository.findAll()) {
@@ -60,11 +60,18 @@ public class ReseptipankkiApplication {
 			
 			log.info("Save demo users");
 			
-			User user1 = new User("user1", "User1", "$2a$10$/DvaHu98HsSucTsDBvCxGeJxfQP1szoVJuEunuBceMSrxtvnATGii", "USER");
-			User admin1 = new  User("admin1", "Admin1", "$2a$10$T62MKRq3O7e989jLzQQybuEiEPK1mjfZbo5Xfdn5JQTQ5nQ1n1iGy", "ADMIN");
+			User user1 = new User("User1", "$2a$10$/DvaHu98HsSucTsDBvCxGeJxfQP1szoVJuEunuBceMSrxtvnATGii", "USER");
+			User admin1 = new User("Admin", "$2a$10$rjgFWjt.0zNgPipOuJ801udJLu1MdQzBzkWNoX90F4BdNKCsW4XHW", "ADMIN");
+			User jutta = new User("Jutta", "$2a$10$9u13Y9GNxZ1cOJyVw/sxMuQwkyeGxHA.b9SV5mQKDsGmDEQ02TIjS", "ADMIN");
 			
 			userRepository.save(user1);
 			userRepository.save(admin1);
+			userRepository.save(jutta);
+			
+			log.info("Fetch all users");
+			for (User user : userRepository.findAll()) {
+				log.info(user.toString());
+			}
 			
 		};
 	}
