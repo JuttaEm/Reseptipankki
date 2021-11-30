@@ -62,7 +62,8 @@
 				</tr>
 				<tr>
 					<td style="padding-right: 15px">Link to the recipe:</td>	
-					<td><input type="text" id="comment" placeholder="Link to the recipe webpage" th:field="*{recipeLink}"/></td>		
+					<td><input type="text" id="recipeLink" placeholder="Link to the recipe webpage" th:field="*{recipeLink}"/></td>
+					<td th:if="${#fields.hasErrors('recipeLink')}" th:errors="*{recipeLink}">Link Error</td>		
 				</tr>			
 			</table>
 			

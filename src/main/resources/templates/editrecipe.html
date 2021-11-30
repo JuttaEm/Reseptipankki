@@ -59,6 +59,12 @@
 			</div>
 			
 			<div class="form-group">
+			<label style="padding-right: 15px" for="recipeLink">Link</label>
+			<input type="text" id="recipeLink" th:field="*{recipeLink}"/>
+			<label th:if="${#fields.hasErrors('recipeLink')}" th:errors="*{recipeLink}">Link Error</label>
+			</div>
+			
+			<div class="form-group">
 			<label class="dropdown" for="categorylist">Category</label>
 				<select id="categorylist" th:field="*{category}" class="form-control">
 					<option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>

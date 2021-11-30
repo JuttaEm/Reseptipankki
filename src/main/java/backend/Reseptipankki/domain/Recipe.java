@@ -32,6 +32,7 @@ public class Recipe {
 	@NotNull
 	private float rating;
 	
+	@NotNull
 	private String recipeLink;
 	
 	@ManyToOne
@@ -109,9 +110,11 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		return "Recipe [recipeId=" + recipeId + ", header=" + header + ", comment=" + comment + ", rating="
-				+ rating + ", category=" + category + "]";
+		return "Recipe [recipeId=" + recipeId + ", header=" + header + ", comment=" + comment + ", rating=" + rating
+				+ ", recipeLink=" + recipeLink + ", category=" + category + "]";
 	}
+
+
 
 
 	
