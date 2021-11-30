@@ -29,7 +29,10 @@ public class Recipe {
 
 	@Min(1)
 	@Max(5)
+	@NotNull
 	private float rating;
+	
+	private String recipeLink;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("recipes")
@@ -50,12 +53,14 @@ public class Recipe {
 		this.rating = rating;
 	}
 	
-	public Recipe(String header, String comment, float rating, Category category) {
+	
+	public Recipe(String header, String comment, float rating, String recipeLink, Category category) {
 		super();
 		this.recipeId = 0;
 		this.header = header;
 		this.comment = comment;
 		this.rating = rating;
+		this.recipeLink = recipeLink;
 		this.category = category;
 	}
 	
@@ -85,7 +90,16 @@ public class Recipe {
 	}
 	public void setRating(float rating) {
 		this.rating = rating;
-	}	
+	}
+		
+	public String getRecipeLink() {
+		return recipeLink;
+	}
+
+	public void setRecipeLink(String recipeLink) {
+		this.recipeLink = recipeLink;
+	}
+
 	public Category getCategory() {
 		return category;
 	}

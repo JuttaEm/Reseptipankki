@@ -51,12 +51,12 @@ public class ReseptipankkiApplication {
 			
 			log.info("Save demo recipes");
 			
-			recipeRepository.save(new Recipe("Makaronilaatikko", "Loistava vegaaninen ruoka!", 4, category1));
-			recipeRepository.save(new Recipe("Kasvissosekeitto", "Maukasta talviruokaa", 3, category2));
-			recipeRepository.save(new Recipe("Tortillat", "Helppoa ja herkullista :)", 5, category3));
-			recipeRepository.save(new Recipe("Porkkanakakku", "Terveellinen vaihtoehto täytekakulle", 4, category4));
-			recipeRepository.save(new Recipe("Munakasrulla", "Yllättävän vaikea saada pysymään koossa", 2, category5));
-			recipeRepository.save(new Recipe("Paistettu riisi kanalla", "Superhelppo arkiruoka", 5, category6));
+			recipeRepository.save(new Recipe("Makaronilaatikko", "Loistava vegaaninen ruoka!", 4, "https://www.myllynparas.fi/reseptit/liha-makaronilaatikko", category1));
+			recipeRepository.save(new Recipe("Kasvissosekeitto", "Maukasta talviruokaa", 3, "https://www.martat.fi/reseptit/kasvissosekeitto/", category2));
+			recipeRepository.save(new Recipe("Tortillat", "Helppoa ja herkullista :)", 5, "https://www.k-ruoka.fi/reseptit/jauhelihatortillat", category3));
+			recipeRepository.save(new Recipe("Porkkanakakku", "Terveellinen vaihtoehto täytekakulle", 4, "https://www.valio.fi/reseptit/porkkanakakku-pellillinen/", category4));
+			recipeRepository.save(new Recipe("Munakasrulla", "Yllättävän vaikea saada pysymään koossa", 2, "https://www.ruokajakoti.fi/Jauheliha-munakasrulla", category5));
+			recipeRepository.save(new Recipe("Paistettu riisi kanalla", "Superhelppo arkiruoka", 5, "https://www.soppa365.fi/reseptit/teemu-leminen/etniset-ruuat-arjen-nopeat/paistettu-riisi", category6));
 			
 			log.info("Fetch all recipes");
 			for (Recipe recipe : recipeRepository.findAll()) {
@@ -65,7 +65,7 @@ public class ReseptipankkiApplication {
 			
 			log.info("Save demo users");
 			
-			User user1 = new User("User1", "$2a$10$/DvaHu98HsSucTsDBvCxGeJxfQP1szoVJuEunuBceMSrxtvnATGii", "USER");
+			User user1 = new User("User", "$2a$10$UiZRXvPASH1l0bmpw8sEe.SNeOXcf4j7nHV9kyAyc4YzoFDLyspIS", "USER");
 			User admin1 = new User("Admin", "$2a$10$rjgFWjt.0zNgPipOuJ801udJLu1MdQzBzkWNoX90F4BdNKCsW4XHW", "ADMIN");
 			User jutta = new User("Jutta", "$2a$10$9u13Y9GNxZ1cOJyVw/sxMuQwkyeGxHA.b9SV5mQKDsGmDEQ02TIjS", "ADMIN");
 			

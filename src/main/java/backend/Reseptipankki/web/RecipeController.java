@@ -50,10 +50,10 @@ public class RecipeController {
 	}
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@PostMapping("/addrecipe")
+	@RequestMapping("/addrecipe")
 	public String recipeAdded(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+		model.addAttribute("categories", categoryRepository.findAll());
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("categories", categoryRepository.findAll());
 			return "addrecipe";
 		} else {
 			model.addAttribute("recipe", recipe);
@@ -75,6 +75,19 @@ public class RecipeController {
 		model.addAttribute("recipe", recipeRepository.findById(recipeId));
 		model.addAttribute("categories", categoryRepository.findAll());
 		return "editrecipe";
+	}
+	
+	@PostMapping("/save")
+	public String save(@Valid Recipe recipe, BindingResult bindingResult, Model model) {
+		model.addAttribute("categories", categoryRepository.findAll());
+		if (bindingResult.hasErrors()) {
+			return "editrecipe";
+		} else {
+			model.addAttribute("recipe", recipe);
+			recipeRepository.save(recipe);
+			return "redirect:recipelist";
+		}
+		
 	}
 	
 	

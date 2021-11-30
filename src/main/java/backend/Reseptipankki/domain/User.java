@@ -17,7 +17,7 @@ public class User {
 	private Long userId;
 	
 	@NotNull
-	@Size(min=5, max=20)
+	@Size(min=4, max=20)
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	

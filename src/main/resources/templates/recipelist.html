@@ -50,7 +50,7 @@
 		
 		<tr th:each="recipe : ${recipes}">
 		<td th:text="${recipe.category.categoryName}">Category</td>
-		<td th:text="${recipe.header}">Header</td>
+		<td><a th:text="${recipe.header}" th:href="${recipe.recipeLink}" target="_blank"></a></td>
 		<td th:text="${recipe.comment}">Comments</td>
 		<td th:text="${recipe.rating}">Rating</td>
 		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</a></td>
