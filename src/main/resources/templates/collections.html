@@ -5,7 +5,6 @@
 	<title>Reseptipankki</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -36,34 +35,29 @@
 </nav>
 
 <br/>
-	
+
 	<table class="table">
 	<thead class="thead-light">
 		<tr>
-			<th scope="col">Category</th>
-			<th scope="col">Recipe</th>
-			<th scope="col">Comments</th>
-			<th scope="col">Rating</th>
-			<th> </th>
-			<th> </th>
+			<th scope="col">Header</th>
+			<th scope="col">Description</th>
+			<th scope="col">Link to blog/webpage</th>
+			
 		</tr>
 		
-		<tr th:each="recipe : ${recipes}">
-		<td th:text="${recipe.category.categoryName}">Category</td>
-		<td th:text="${recipe.header}">Header</td>
-		<td th:text="${recipe.comment}">Comments</td>
-		<td th:text="${recipe.rating}">Rating</td>
-		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${recipe.recipeId})}">Delete</a></td>
-		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-dark" th:href="@{/edit/{id}(id=${recipe.recipeId})}">Edit</a></td>
+		<tr th:each="collection : ${collections}">
+		<td th:text="${collection.collectionName}">Header</td>
+		<td th:text="${collection.description}">Description</td>
+		<td><a th:href="${collection.link}" th:text="${collection.link}" target="_blank"></a></td>
 		</tr>
 		
 	</table>
-	
-	<br/>
-	
-	<a sec:authorize="hasAuthority('ADMIN')" href="/addrecipe" class="btn btn-dark">Add new recipe</a>
-	
-</div> 
 
+
+
+
+
+</div>
 
 </body>
+</html>

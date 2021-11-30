@@ -92,11 +92,12 @@ public class RecipeController {
 		return recipeRepository.findById(recipeId);
 	}
 	
-	// RESTful service to save new recipe
-	@RequestMapping(value="/recipes", method = RequestMethod.POST)
-	public @ResponseBody Recipe saveRecipeRest(@RequestBody Recipe recipe) {
-		return recipeRepository.save(recipe);
+	// REST API documentation
+	@RequestMapping(value = {"/restapi"}, method = RequestMethod.GET)
+	public String restapiDocumentation() {
+		return "restapi";
 	}
+	
 	
 	
 	

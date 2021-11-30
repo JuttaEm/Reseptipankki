@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
+
 @Entity
 public class Recipe {
 	
@@ -24,10 +26,10 @@ public class Recipe {
 	@Size(min=3, max=40)
 	private String header;
 	private String comment;
-	
+
 	@Min(1)
 	@Max(5)
-	private int rating;
+	private float rating;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("recipes")
@@ -40,7 +42,7 @@ public class Recipe {
 		super();
 	}
 	
-	public Recipe(String header, String comment, int rating) {
+	public Recipe(String header, String comment, float rating) {
 		super();
 		this.recipeId = 0;
 		this.header = header;
@@ -48,7 +50,7 @@ public class Recipe {
 		this.rating = rating;
 	}
 	
-	public Recipe(String header, String comment, int rating, Category category) {
+	public Recipe(String header, String comment, float rating, Category category) {
 		super();
 		this.recipeId = 0;
 		this.header = header;
@@ -78,10 +80,10 @@ public class Recipe {
 		this.comment = comment;
 	}
 
-	public int getRating() {
+	public float getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}	
 	public Category getCategory() {

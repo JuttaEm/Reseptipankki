@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import backend.Reseptipankki.domain.Category;
 import backend.Reseptipankki.domain.CategoryRepository;
+import backend.Reseptipankki.domain.Collection;
+import backend.Reseptipankki.domain.CollectionRepository;
 import backend.Reseptipankki.domain.Recipe;
 import backend.Reseptipankki.domain.RecipeRepository;
 import backend.Reseptipankki.domain.User;
@@ -24,7 +26,10 @@ public class ReseptipankkiApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demo(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
+	public CommandLineRunner demo(RecipeRepository recipeRepository,
+			CategoryRepository categoryRepository,
+			UserRepository userRepository,
+			CollectionRepository collectionRepository) {
 		return (args) -> {
 			
 			log.info("Save demo categories");
@@ -68,10 +73,18 @@ public class ReseptipankkiApplication {
 			userRepository.save(admin1);
 			userRepository.save(jutta);
 			
-			log.info("Fetch all users");
-			for (User user : userRepository.findAll()) {
-				log.info(user.toString());
-			}
+			
+			log.info("Save demo collections");
+			
+			Collection blog1 = new Collection("Viimeistä murua myöten", "Kasvispainotteisia reseptejä ja retkiruokia", "https://viimeistamuruamyoten.com/");
+			Collection blog2 = new Collection("Chocochili", "Elina Innasen vegaaniruokablogi", "https://chocochili.net/");
+			Collection blog3 = new Collection("Half Baked Harvest", "Rustic and delicious dishes in English", "https://www.halfbakedharvest.com/");
+			Collection webpage1 = new Collection("K-Ruoka reseptit", "Helppoja arkiruokia, hyvät hakutoiminnot", "https://www.k-ruoka.fi/reseptit");
+			
+			collectionRepository.save(blog1);
+			collectionRepository.save(blog2);
+			collectionRepository.save(blog3);
+			collectionRepository.save(webpage1);
 			
 		};
 	}

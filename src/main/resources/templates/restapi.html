@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<title>Reseptipankki</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">My Recipes</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  </div>
+      <div class="nav navbar-nav navbar-right justify-content-between" style="padding:20px 0">
+		<span class="navbar-text">[[${#httpServletRequest.remoteUser}]]</span>
+		<form style="padding-left: 15px" th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-dark"/>
+		</form>
+	</div>
+</nav>
+
+<br/>
+
+<h1>Rest API documentation</h1>
+
+<br/>
+
+<h3>General</h3>
+<p>Reseptipankki is a database which contains recipes and categories for the recipes.
+There is a One-to-Many link between category and recipe. Recipe belongs to one category.
+Recipe contains the following attributes:
+</p>
+
+	<ul>
+		<li>recipeId (long)</li>
+		<li>header (String)</li>
+		<li>comment (String)</li>
+		<li>rating (float)</li>
+	</ul>
+	
+<p>Category contains the following attributes:</p>
+	
+	<ul>
+		<li>categoryId (long)</li>
+		<li>categoryName (String)</li>
+	</ul>
+	
+<br/>
+	
+<h3>Get API content by calling the root address</h3>
+<p>LINKKI</p>
+<br/>
+
+<h3>List of recipes</h3>
+<p>You can fetch all recipes by calling /api/recipes endpoint using the GET-method.</p>
+<img th:src="@{/images/apirecipes.jpg}"/>
+<br/>
+
+<h3>Recipe by id</h3>
+<p>You can fetch a specific recipe by calling /api/recipes/{id} endpoint with the recipe’s id (recipeId) and using the GET-method.</p>
+<img th:src="@{/images/apirecipeid.jpg}"/>
+<br/>
+
+<h3>List of categories</h3>
+<p>You can fetch all categories by calling /api/categories endpoint using the GET-method.</p>
+<img th:src="@{/images/apicategories.jpg}"/>
+
+<br/>
+
+</div>
+
+</body>
+</html>
